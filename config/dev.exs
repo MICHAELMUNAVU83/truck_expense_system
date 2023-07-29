@@ -2,8 +2,7 @@ import Config
 
 # Configure your database
 config :truck_expense_system, TruckExpenseSystem.Repo,
-  username: "postgres",
-  password: "postgres",
+
   hostname: "localhost",
   database: "truck_expense_system_dev",
   stacktrace: true,

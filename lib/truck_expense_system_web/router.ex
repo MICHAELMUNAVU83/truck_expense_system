@@ -20,7 +20,7 @@ defmodule TruckExpenseSystemWeb.Router do
   scope "/", TruckExpenseSystemWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    live "/", PageLive.Index, :index
     live "/trucks", TruckLive.Index, :index
     live "/trucks/new", TruckLive.Index, :new
     live "/trucks/:id/edit", TruckLive.Index, :edit
