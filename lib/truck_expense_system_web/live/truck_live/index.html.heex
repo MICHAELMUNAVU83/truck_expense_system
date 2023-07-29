@@ -1,0 +1,43 @@
+<h1>Listing Trucks</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.truck_index_path(@socket, :index)}>
+    <.live_component
+      module={TruckExpenseSystemWeb.TruckLive.FormComponent}
+      id={@truck.id || :new}
+      title={@page_title}
+      action={@live_action}
+      truck={@truck}
+      return_to={Routes.truck_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Registration number</th>
+      <th>Image</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="trucks">
+    <%= for truck <- @trucks do %>
+      <tr id={"truck-#{truck.id}"}>
+        <td><%= truck.registration_number %></td>
+        <td><%= truck.image %></td>
+        <td><%= truck.description %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.truck_show_path(@socket, :show, truck) %></span>
+          <span><%= live_patch "Edit", to: Routes.truck_index_path(@socket, :edit, truck) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: truck.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Truck", to: Routes.truck_index_path(@socket, :new) %></span>

@@ -1,0 +1,51 @@
+<h1>Show Spare</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.spare_show_path(@socket, :show, @spare)}>
+    <.live_component
+      module={TruckExpenseSystemWeb.SpareLive.FormComponent}
+      id={@spare.id}
+      title={@page_title}
+      action={@live_action}
+      spare={@spare}
+      return_to={Routes.spare_show_path(@socket, :show, @spare)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @spare.name %>
+  </li>
+
+  <li>
+    <strong>Type of spare:</strong>
+    <%= @spare.type_of_spare %>
+  </li>
+
+  <li>
+    <strong>Cost:</strong>
+    <%= @spare.cost %>
+  </li>
+
+  <li>
+    <strong>Quantity:</strong>
+    <%= @spare.quantity %>
+  </li>
+
+  <li>
+    <strong>Total cost:</strong>
+    <%= @spare.total_cost %>
+  </li>
+
+  <li>
+    <strong>Location purchased at:</strong>
+    <%= @spare.location_purchased_at %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.spare_show_path(@socket, :edit, @spare), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.spare_index_path(@socket, :index) %></span>

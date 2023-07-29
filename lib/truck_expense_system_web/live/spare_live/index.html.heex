@@ -1,0 +1,49 @@
+<h1>Listing Spares</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.spare_index_path(@socket, :index)}>
+    <.live_component
+      module={TruckExpenseSystemWeb.SpareLive.FormComponent}
+      id={@spare.id || :new}
+      title={@page_title}
+      action={@live_action}
+      spare={@spare}
+      return_to={Routes.spare_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type of spare</th>
+      <th>Cost</th>
+      <th>Quantity</th>
+      <th>Total cost</th>
+      <th>Location purchased at</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="spares">
+    <%= for spare <- @spares do %>
+      <tr id={"spare-#{spare.id}"}>
+        <td><%= spare.name %></td>
+        <td><%= spare.type_of_spare %></td>
+        <td><%= spare.cost %></td>
+        <td><%= spare.quantity %></td>
+        <td><%= spare.total_cost %></td>
+        <td><%= spare.location_purchased_at %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.spare_show_path(@socket, :show, spare) %></span>
+          <span><%= live_patch "Edit", to: Routes.spare_index_path(@socket, :edit, spare) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: spare.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Spare", to: Routes.spare_index_path(@socket, :new) %></span>

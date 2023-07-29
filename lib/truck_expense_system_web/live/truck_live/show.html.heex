@@ -1,0 +1,36 @@
+<h1>Show Truck</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.truck_show_path(@socket, :show, @truck)}>
+    <.live_component
+      module={TruckExpenseSystemWeb.TruckLive.FormComponent}
+      id={@truck.id}
+      title={@page_title}
+      action={@live_action}
+      truck={@truck}
+      return_to={Routes.truck_show_path(@socket, :show, @truck)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Registration number:</strong>
+    <%= @truck.registration_number %>
+  </li>
+
+  <li>
+    <strong>Image:</strong>
+    <%= @truck.image %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @truck.description %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.truck_show_path(@socket, :edit, @truck), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.truck_index_path(@socket, :index) %></span>
