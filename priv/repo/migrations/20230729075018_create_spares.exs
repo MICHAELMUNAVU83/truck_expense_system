@@ -10,6 +10,7 @@ defmodule TruckExpenseSystem.Repo.Migrations.CreateSpares do
       add :total_cost, :integer
       add :location_purchased_at, :string
       add :truck_id, references(:trucks, on_delete: :nothing), null: false
+      add :approved, :boolean, default: false
 
       timestamps()
     end

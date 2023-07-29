@@ -26,7 +26,9 @@ config :truck_expense_system, TruckExpenseSystemWeb.Endpoint,
   secret_key_base: "5IKl4uk6MZHhVotk1FEevhmeedXDDtPxOuCv3/th9iTvx4o2osTjJED6/kimBGkn",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
+
   ]
 
 # ## SSL Support

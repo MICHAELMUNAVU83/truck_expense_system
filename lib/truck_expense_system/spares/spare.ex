@@ -9,6 +9,7 @@ defmodule TruckExpenseSystem.Spares.Spare do
     field :quantity, :string
     field :total_cost, :integer
     field :location_purchased_at, :string
+    field :approved, :boolean, default: false
     belongs_to :truck, TruckExpenseSystem.Trucks.Truck
 
     timestamps()
@@ -24,7 +25,8 @@ defmodule TruckExpenseSystem.Spares.Spare do
       :quantity,
       :total_cost,
       :location_purchased_at,
-      :truck_id
+      :truck_id,
+      :approved
     ])
     |> validate_required([
       :name,
@@ -33,7 +35,8 @@ defmodule TruckExpenseSystem.Spares.Spare do
       :quantity,
       :total_cost,
       :location_purchased_at,
-      :truck_id
+      :truck_id,
+      :approved
     ])
   end
 end
