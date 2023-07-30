@@ -1,3 +1,7 @@
+<p>
+  Pending spares
+</p>
+
 <div>
   <%= for pending_spare <- @pending_spares do %>
     <%= pending_spare.name %>
@@ -6,6 +10,23 @@
       to: "#",
       phx_click: "approve_spare",
       phx_value_id: pending_spare.id,
+      data: [confirm: "Are you sure?"]
+    ) %>
+  <% end %>
+</div>
+
+<p>
+  Approved spares
+</p>
+
+<div>
+  <%= for approved <- @approved_spares do %>
+    <%= approved.name %>
+
+    <%= link("Disapprove",
+      to: "#",
+      phx_click: "disapprove_spare",
+      phx_value_id: approved.id,
       data: [confirm: "Are you sure?"]
     ) %>
   <% end %>
