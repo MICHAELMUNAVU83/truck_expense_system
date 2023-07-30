@@ -14,7 +14,6 @@
 <% end %>
 
 <ul>
-
   <li>
     <strong>Name:</strong>
     <%= @spare.name %>
@@ -44,8 +43,10 @@
     <strong>Location purchased at:</strong>
     <%= @spare.location_purchased_at %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.spare_show_path(@socket, :edit, @spare), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.spare_index_path(@socket, :index) %></span>
+<span>
+  <%= live_patch("Edit", to: Routes.spare_show_path(@socket, :edit, @spare), class: "button") %>
+</span>
+|
+<span><%= live_redirect("Back", to: Routes.spare_index_path(@socket, :index)) %></span>

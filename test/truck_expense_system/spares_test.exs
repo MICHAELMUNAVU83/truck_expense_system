@@ -8,7 +8,14 @@ defmodule TruckExpenseSystem.SparesTest do
 
     import TruckExpenseSystem.SparesFixtures
 
-    @invalid_attrs %{name: nil, type_of_spare: nil, cost: nil, quantity: nil, total_cost: nil, location_purchased_at: nil}
+    @invalid_attrs %{
+      name: nil,
+      type_of_spare: nil,
+      cost: nil,
+      quantity: nil,
+      total_cost: nil,
+      location_purchased_at: nil
+    }
 
     test "list_spares/0 returns all spares" do
       spare = spare_fixture()
@@ -21,7 +28,14 @@ defmodule TruckExpenseSystem.SparesTest do
     end
 
     test "create_spare/1 with valid data creates a spare" do
-      valid_attrs = %{name: "some name", type_of_spare: "some type_of_spare", cost: 42, quantity: "some quantity", total_cost: 42, location_purchased_at: "some location_purchased_at"}
+      valid_attrs = %{
+        name: "some name",
+        type_of_spare: "some type_of_spare",
+        cost: 42,
+        quantity: "some quantity",
+        total_cost: 42,
+        location_purchased_at: "some location_purchased_at"
+      }
 
       assert {:ok, %Spare{} = spare} = Spares.create_spare(valid_attrs)
       assert spare.name == "some name"
@@ -38,7 +52,15 @@ defmodule TruckExpenseSystem.SparesTest do
 
     test "update_spare/2 with valid data updates the spare" do
       spare = spare_fixture()
-      update_attrs = %{name: "some updated name", type_of_spare: "some updated type_of_spare", cost: 43, quantity: "some updated quantity", total_cost: 43, location_purchased_at: "some updated location_purchased_at"}
+
+      update_attrs = %{
+        name: "some updated name",
+        type_of_spare: "some updated type_of_spare",
+        cost: 43,
+        quantity: "some updated quantity",
+        total_cost: 43,
+        location_purchased_at: "some updated location_purchased_at"
+      }
 
       assert {:ok, %Spare{} = spare} = Spares.update_spare(spare, update_attrs)
       assert spare.name == "some updated name"

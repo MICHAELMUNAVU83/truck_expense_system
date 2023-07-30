@@ -21,7 +21,11 @@ defmodule TruckExpenseSystem.TrucksTest do
     end
 
     test "create_truck/1 with valid data creates a truck" do
-      valid_attrs = %{description: "some description", image: "some image", registration_number: "some registration_number"}
+      valid_attrs = %{
+        description: "some description",
+        image: "some image",
+        registration_number: "some registration_number"
+      }
 
       assert {:ok, %Truck{} = truck} = Trucks.create_truck(valid_attrs)
       assert truck.description == "some description"
@@ -35,7 +39,12 @@ defmodule TruckExpenseSystem.TrucksTest do
 
     test "update_truck/2 with valid data updates the truck" do
       truck = truck_fixture()
-      update_attrs = %{description: "some updated description", image: "some updated image", registration_number: "some updated registration_number"}
+
+      update_attrs = %{
+        description: "some updated description",
+        image: "some updated image",
+        registration_number: "some updated registration_number"
+      }
 
       assert {:ok, %Truck{} = truck} = Trucks.update_truck(truck, update_attrs)
       assert truck.description == "some updated description"

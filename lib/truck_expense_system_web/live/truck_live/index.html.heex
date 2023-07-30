@@ -8,6 +8,7 @@
       title={@page_title}
       action={@live_action}
       truck={@truck}
+      current_user={@current_user}
       return_to={Routes.truck_index_path(@socket, :index)}
     />
   </.modal>
@@ -27,17 +28,30 @@
     <%= for truck <- @trucks do %>
       <tr id={"truck-#{truck.id}"}>
         <td><%= truck.registration_number %></td>
-        <td><%= truck.image %></td>
+        <td>
+          <img src={truck.image} class="h-[100px] w-[100px] object-cover" />
+        </td>
         <td><%= truck.description %></td>
 
         <td>
-          <span><%= live_redirect "Show", to: Routes.truck_show_path(@socket, :show, truck) %></span>
-          <span><%= live_patch "Edit", to: Routes.truck_index_path(@socket, :edit, truck) %></span>
-          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: truck.id, data: [confirm: "Are you sure?"] %></span>
+          <span>
+            <%= live_redirect("Show", to: Routes.truck_show_path(@socket, :show, truck)) %>
+          </span>
+          <span>
+            <%= live_patch("Edit", to: Routes.truck_index_path(@socket, :edit, truck)) %>
+          </span>
+          <span>
+            <%= link("Delete",
+              to: "#",
+              phx_click: "delete",
+              phx_value_id: truck.id,
+              data: [confirm: "Are you sure?"]
+            ) %>
+          </span>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<span><%= live_patch "New Truck", to: Routes.truck_index_path(@socket, :new) %></span>
+<span><%= live_patch("New Truck", to: Routes.truck_index_path(@socket, :new)) %></span>

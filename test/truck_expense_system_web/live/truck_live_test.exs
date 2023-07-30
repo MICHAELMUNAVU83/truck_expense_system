@@ -4,8 +4,16 @@ defmodule TruckExpenseSystemWeb.TruckLiveTest do
   import Phoenix.LiveViewTest
   import TruckExpenseSystem.TrucksFixtures
 
-  @create_attrs %{description: "some description", image: "some image", registration_number: "some registration_number"}
-  @update_attrs %{description: "some updated description", image: "some updated image", registration_number: "some updated registration_number"}
+  @create_attrs %{
+    description: "some description",
+    image: "some image",
+    registration_number: "some registration_number"
+  }
+  @update_attrs %{
+    description: "some updated description",
+    image: "some updated image",
+    registration_number: "some updated registration_number"
+  }
   @invalid_attrs %{description: nil, image: nil, registration_number: nil}
 
   defp create_truck(_) do

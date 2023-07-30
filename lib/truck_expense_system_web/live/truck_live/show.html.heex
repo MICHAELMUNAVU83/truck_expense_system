@@ -1,20 +1,18 @@
-<h1>Show Truck</h1>
-
-<%= if @live_action in [:edit] do %>
-  <.modal return_to={Routes.truck_show_path(@socket, :show, @truck)}>
+<%= if @live_action in [:add_spare , :edit_spare] do %>
+  <.modal return_to={Routes.truck_show_path(@socket, :show, @truck.id)}>
     <.live_component
-      module={TruckExpenseSystemWeb.TruckLive.FormComponent}
-      id={@truck.id}
+      module={TruckExpenseSystemWeb.SpareLive.FormComponent}
+      id={@spare.id || :new}
       title={@page_title}
       action={@live_action}
+      spare={@spare}
       truck={@truck}
-      return_to={Routes.truck_show_path(@socket, :show, @truck)}
+      current_user={@current_user}
+      return_to={Routes.truck_show_path(@socket, :show, @truck.id)}
     />
   </.modal>
 <% end %>
-
 <ul>
-
   <li>
     <strong>Registration number:</strong>
     <%= @truck.registration_number %>
@@ -22,15 +20,28 @@
 
   <li>
     <strong>Image:</strong>
-    <%= @truck.image %>
+    <img src={@truck.image} class="w-[100px] object-cover" />
   </li>
 
   <li>
     <strong>Description:</strong>
     <%= @truck.description %>
   </li>
-
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.truck_show_path(@socket, :edit, @truck), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.truck_index_path(@socket, :index) %></span>
+<div>
+  <%= for spare <- @truck.spares do %>
+    <div>
+      <%= spare.name %>
+       <%= spare.total_cost %>
+
+      <%= live_redirect("Edit",
+        to: Routes.truck_show_path(@socket, :edit_spare, @truck.id, spare.id)
+      ) %>
+    </div>
+  <% end %>
+</div>
+
+<%= live_redirect("Add Spare", to: Routes.truck_show_path(@socket, :add_spare, @truck.id)) %>
+
+<span><%= live_redirect("Back", to: Routes.truck_index_path(@socket, :index)) %></span>

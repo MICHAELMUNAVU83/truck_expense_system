@@ -4,36 +4,39 @@ defmodule TruckExpenseSystemWeb.Router do
   import TruckExpenseSystemWeb.UserAuth
 
   pipeline :browser do
-    plug :accepts, ["html"]
-    plug :fetch_session
-    plug :fetch_live_flash
-    plug :put_root_layout, {TruckExpenseSystemWeb.LayoutView, :root}
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-    plug :fetch_current_user
+    plug(:accepts, ["html"])
+    plug(:fetch_session)
+    plug(:fetch_live_flash)
+    plug(:put_root_layout, {TruckExpenseSystemWeb.LayoutView, :root})
+    plug(:protect_from_forgery)
+    plug(:put_secure_browser_headers)
+    plug(:fetch_current_user)
   end
 
   pipeline :api do
-    plug :accepts, ["json"]
+    plug(:accepts, ["json"])
   end
 
   scope "/", TruckExpenseSystemWeb do
-    pipe_through :browser
+    pipe_through(:browser)
 
-    live "/", PageLive.Index, :index
-    live "/trucks", TruckLive.Index, :index
-    live "/trucks/new", TruckLive.Index, :new
-    live "/trucks/:id/edit", TruckLive.Index, :edit
+    live("/", PageLive.Index, :index)
+    live("/trucks", TruckLive.Index, :index)
+    live("/trucks/new", TruckLive.Index, :new)
+    live("/trucks/:id/edit", TruckLive.Index, :edit)
 
-    live "/trucks/:id", TruckLive.Show, :show
-    live "/trucks/:id/show/edit", TruckLive.Show, :edit
+    live("/trucks/:id/add_spare", TruckLive.Show, :add_spare)
+    live("/trucks/:id/:spare_id/edit_spare", TruckLive.Show, :edit_spare)
 
-    live "/spares", SpareLive.Index, :index
-    live "/spares/new", SpareLive.Index, :new
-    live "/spares/:id/edit", SpareLive.Index, :edit
+    live("/trucks/:id", TruckLive.Show, :show)
+    live("/trucks/:id/show/edit", TruckLive.Show, :edit)
 
-    live "/spares/:id", SpareLive.Show, :show
-    live "/spares/:id/show/edit", SpareLive.Show, :edit
+    live("/spares", SpareLive.Index, :index)
+    live("/spares/new", SpareLive.Index, :new)
+    live("/spares/:id/edit", SpareLive.Index, :edit)
+
+    live("/spares/:id", SpareLive.Show, :show)
+    live("/spares/:id/show/edit", SpareLive.Show, :edit)
   end
 
   # Other scopes may use custom stacks.
@@ -52,9 +55,9 @@ defmodule TruckExpenseSystemWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      live_dashboard "/dashboard", metrics: TruckExpenseSystemWeb.Telemetry
+      live_dashboard("/dashboard", metrics: TruckExpenseSystemWeb.Telemetry)
     end
   end
 
@@ -64,42 +67,42 @@ defmodule TruckExpenseSystemWeb.Router do
   # node running the Phoenix server.
   if Mix.env() == :dev do
     scope "/dev" do
-      pipe_through :browser
+      pipe_through(:browser)
 
-      forward "/mailbox", Plug.Swoosh.MailboxPreview
+      forward("/mailbox", Plug.Swoosh.MailboxPreview)
     end
   end
 
   ## Authentication routes
 
   scope "/", TruckExpenseSystemWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through([:browser, :redirect_if_user_is_authenticated])
 
-    get "/users/register", UserRegistrationController, :new
-    post "/users/register", UserRegistrationController, :create
-    get "/users/log_in", UserSessionController, :new
-    post "/users/log_in", UserSessionController, :create
-    get "/users/reset_password", UserResetPasswordController, :new
-    post "/users/reset_password", UserResetPasswordController, :create
-    get "/users/reset_password/:token", UserResetPasswordController, :edit
-    put "/users/reset_password/:token", UserResetPasswordController, :update
+    get("/users/register", UserRegistrationController, :new)
+    post("/users/register", UserRegistrationController, :create)
+    get("/users/log_in", UserSessionController, :new)
+    post("/users/log_in", UserSessionController, :create)
+    get("/users/reset_password", UserResetPasswordController, :new)
+    post("/users/reset_password", UserResetPasswordController, :create)
+    get("/users/reset_password/:token", UserResetPasswordController, :edit)
+    put("/users/reset_password/:token", UserResetPasswordController, :update)
   end
 
   scope "/", TruckExpenseSystemWeb do
-    pipe_through [:browser, :require_authenticated_user]
+    pipe_through([:browser, :require_authenticated_user])
 
-    get "/users/settings", UserSettingsController, :edit
-    put "/users/settings", UserSettingsController, :update
-    get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
+    get("/users/settings", UserSettingsController, :edit)
+    put("/users/settings", UserSettingsController, :update)
+    get("/users/settings/confirm_email/:token", UserSettingsController, :confirm_email)
   end
 
   scope "/", TruckExpenseSystemWeb do
-    pipe_through [:browser]
+    pipe_through([:browser])
 
-    delete "/users/log_out", UserSessionController, :delete
-    get "/users/confirm", UserConfirmationController, :new
-    post "/users/confirm", UserConfirmationController, :create
-    get "/users/confirm/:token", UserConfirmationController, :edit
-    post "/users/confirm/:token", UserConfirmationController, :update
+    delete("/users/log_out", UserSessionController, :delete)
+    get("/users/confirm", UserConfirmationController, :new)
+    post("/users/confirm", UserConfirmationController, :create)
+    get("/users/confirm/:token", UserConfirmationController, :edit)
+    post("/users/confirm/:token", UserConfirmationController, :update)
   end
 end

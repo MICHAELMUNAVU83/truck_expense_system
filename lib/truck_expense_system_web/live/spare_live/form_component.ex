@@ -24,10 +24,17 @@ defmodule TruckExpenseSystemWeb.SpareLive.FormComponent do
   end
 
   def handle_event("save", %{"spare" => spare_params}, socket) do
-    save_spare(socket, socket.assigns.action, spare_params)
+    new_spare_params =
+      Map.put(
+        spare_params,
+        "total_cost",
+        String.to_integer(spare_params["quantity"]) * String.to_integer(spare_params["cost"])
+      )
+
+    save_spare(socket, socket.assigns.action, new_spare_params)
   end
 
-  defp save_spare(socket, :edit, spare_params) do
+  defp save_spare(socket, :edit_spare, spare_params) do
     case Spares.update_spare(socket.assigns.spare, spare_params) do
       {:ok, _spare} ->
         {:noreply,
@@ -40,7 +47,7 @@ defmodule TruckExpenseSystemWeb.SpareLive.FormComponent do
     end
   end
 
-  defp save_spare(socket, :new, spare_params) do
+  defp save_spare(socket, :add_spare, spare_params) do
     case Spares.create_spare(spare_params) do
       {:ok, _spare} ->
         {:noreply,

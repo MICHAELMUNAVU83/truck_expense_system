@@ -3,14 +3,15 @@ defmodule TruckExpenseSystem.Spares.Spare do
   import Ecto.Changeset
 
   schema "spares" do
-    field :name, :string
-    field :type_of_spare, :string
-    field :cost, :integer
-    field :quantity, :string
-    field :total_cost, :integer
-    field :location_purchased_at, :string
-    field :approved, :boolean, default: false
-    belongs_to :truck, TruckExpenseSystem.Trucks.Truck
+    field(:name, :string)
+    field(:type_of_spare, :string)
+    field(:cost, :integer)
+    field(:quantity, :integer)
+    field(:total_cost, :integer)
+    field(:location_purchased_at, :string)
+    field(:approved, :boolean, default: false)
+    belongs_to(:truck, TruckExpenseSystem.Trucks.Truck)
+    belongs_to(:user, TruckExpenseSystem.Users.User)
 
     timestamps()
   end
@@ -26,7 +27,8 @@ defmodule TruckExpenseSystem.Spares.Spare do
       :total_cost,
       :location_purchased_at,
       :truck_id,
-      :approved
+      :approved,
+      :user_id
     ])
     |> validate_required([
       :name,
@@ -36,7 +38,8 @@ defmodule TruckExpenseSystem.Spares.Spare do
       :total_cost,
       :location_purchased_at,
       :truck_id,
-      :approved
+      :approved,
+      :user_id
     ])
   end
 end

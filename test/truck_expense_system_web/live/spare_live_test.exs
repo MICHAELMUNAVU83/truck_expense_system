@@ -4,9 +4,30 @@ defmodule TruckExpenseSystemWeb.SpareLiveTest do
   import Phoenix.LiveViewTest
   import TruckExpenseSystem.SparesFixtures
 
-  @create_attrs %{name: "some name", type_of_spare: "some type_of_spare", cost: 42, quantity: "some quantity", total_cost: 42, location_purchased_at: "some location_purchased_at"}
-  @update_attrs %{name: "some updated name", type_of_spare: "some updated type_of_spare", cost: 43, quantity: "some updated quantity", total_cost: 43, location_purchased_at: "some updated location_purchased_at"}
-  @invalid_attrs %{name: nil, type_of_spare: nil, cost: nil, quantity: nil, total_cost: nil, location_purchased_at: nil}
+  @create_attrs %{
+    name: "some name",
+    type_of_spare: "some type_of_spare",
+    cost: 42,
+    quantity: "some quantity",
+    total_cost: 42,
+    location_purchased_at: "some location_purchased_at"
+  }
+  @update_attrs %{
+    name: "some updated name",
+    type_of_spare: "some updated type_of_spare",
+    cost: 43,
+    quantity: "some updated quantity",
+    total_cost: 43,
+    location_purchased_at: "some updated location_purchased_at"
+  }
+  @invalid_attrs %{
+    name: nil,
+    type_of_spare: nil,
+    cost: nil,
+    quantity: nil,
+    total_cost: nil,
+    location_purchased_at: nil
+  }
 
   defp create_spare(_) do
     spare = spare_fixture()

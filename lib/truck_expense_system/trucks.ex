@@ -35,7 +35,7 @@ defmodule TruckExpenseSystem.Trucks do
       ** (Ecto.NoResultsError)
 
   """
-  def get_truck!(id), do: Repo.get!(Truck, id)
+  def get_truck!(id), do: Repo.get!(Truck, id) |> Repo.preload(:spares)
 
   @doc """
   Creates a truck.

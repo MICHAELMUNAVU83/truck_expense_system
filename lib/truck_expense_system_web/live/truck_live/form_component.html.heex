@@ -7,22 +7,22 @@
     id="truck-form"
     phx-target={@myself}
     phx-change="validate"
-    phx-submit="save">
-  
-    <%= label f, :registration_number %>
-    <%= text_input f, :registration_number %>
-    <%= error_tag f, :registration_number %>
-  
-    <%= label f, :image %>
-    <%= text_input f, :image %>
-    <%= error_tag f, :image %>
-  
-    <%= label f, :description %>
-    <%= text_input f, :description %>
-    <%= error_tag f, :description %>
-  
+    phx-submit="save"
+  >
+    <%= hidden_input(f, :user_id, value: @current_user.id) %>
+
+    <%= label(f, :registration_number) %>
+    <%= text_input(f, :registration_number) %>
+    <%= error_tag(f, :registration_number) %>
+
+    <%= label(f, :image) %>
+    <%= live_file_input(@uploads.image) %>
+    <%= label(f, :description) %>
+    <%= text_input(f, :description) %>
+    <%= error_tag(f, :description) %>
+
     <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
+      <%= submit("Save", phx_disable_with: "Saving...") %>
     </div>
   </.form>
 </div>

@@ -3,10 +3,16 @@ defmodule TruckExpenseSystemWeb.TruckLive.Index do
 
   alias TruckExpenseSystem.Trucks
   alias TruckExpenseSystem.Trucks.Truck
+  alias TruckExpenseSystem.Users
 
   @impl true
-  def mount(_params, _session, socket) do
-    {:ok, assign(socket, :trucks, list_trucks())}
+  def mount(_params, session, socket) do
+    current_user = Users.get_user_by_session_token(session["user_token"])
+
+    {:ok,
+     socket
+     |> assign(:trucks, list_trucks())
+     |> assign(:current_user, current_user)}
   end
 
   @impl true
