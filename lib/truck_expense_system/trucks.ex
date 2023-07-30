@@ -19,6 +19,17 @@ defmodule TruckExpenseSystem.Trucks do
   """
   def list_trucks do
     Repo.all(Truck)
+    |> Repo.preload(:spares)
+  end
+
+  def calculate_total_spares(spares) do
+    total = 0
+
+    for spare <- spares do
+      total = total + spare.total_cost
+    end
+
+    total
   end
 
   @doc """

@@ -39,6 +39,7 @@ defmodule TruckExpenseSystemWeb.Router do
     live("/spares/:id/show/edit", SpareLive.Show, :edit)
 
     live("/admin_panel", AdminPanelLive.Index, :index)
+    live("/admin_panel/:id", AdminPanelLive.Show, :show)
   end
 
   # Other scopes may use custom stacks.

@@ -1,20 +1,14 @@
 defmodule TruckExpenseSystemWeb.AdminPanelLive.Index do
   use TruckExpenseSystemWeb, :live_view
   alias TruckExpenseSystem.Spares
+  alias TruckExpenseSystem.Trucks
 
   def mount(_params, _session, socket) do
-    pending_spares =
-      Spares.list_spares()
-      |> Enum.filter(fn spare -> spare.approved == false end)
-
-    approved_spares =
-      Spares.list_spares()
-      |> Enum.filter(fn spare -> spare.approved == true end)
+    trucks = Trucks.list_trucks()
 
     {:ok,
      socket
-     |> assign(:approved_spares, approved_spares)
-     |> assign(:pending_spares, pending_spares)}
+     |> assign(:trucks, trucks)}
   end
 
   def handle_event("approve_spare", %{"id" => id}, socket) do
