@@ -33,7 +33,7 @@
   <%= for spare <- @truck.spares do %>
     <div>
       <%= spare.name %>
-       <%= spare.total_cost %>
+      <%= spare.total_cost %>
 
       <%= live_redirect("Edit",
         to: Routes.truck_show_path(@socket, :edit_spare, @truck.id, spare.id)
