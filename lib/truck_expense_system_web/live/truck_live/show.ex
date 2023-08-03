@@ -34,6 +34,16 @@ defmodule TruckExpenseSystemWeb.TruckLive.Show do
      |> assign(:truck, Trucks.get_truck!(params["id"]))}
   end
 
+  def handle_event("delete_spare", %{"id" => id}, socket) do
+    spare = Spares.get_spare!(id)
+    {:ok, _} = Spares.delete_spare(spare)
+    truck = Trucks.get_truck!(spare.truck_id)
+
+    {:noreply,
+     socket
+     |> assign(:truck, truck)}
+  end
+
   defp page_title(:show), do: "Show Truck"
   defp page_title(:edit), do: "Edit Truck"
   defp page_title(:add_spare), do: "Add Spare"
