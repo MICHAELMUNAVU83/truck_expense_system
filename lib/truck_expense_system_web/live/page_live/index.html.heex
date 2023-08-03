@@ -1,7 +1,7 @@
-<div class="homebg h-[100vh]">
+<div class="homebg  h-[100%] md:h-[100vh]">
   <div class="h-[100%] w-[100%] flex flex-col justify-between  bg-gradient-to-r from-black/50   to-red-500/80">
     <div class="bg-black text-white flex justify-between py-4 p-2">
-      <p class="animate-pulse text-xl font-bold">
+      <p class="animate-pulse md:text-xl font-bold">
         Truck Management System
       </p>
 
@@ -16,7 +16,7 @@
     </div>
 
     <div class="flex flex-col gap-2">
-      <div class="flex  text-7xl text-white  px-8 font-bold flex-col justify-center items-start">
+      <div class="flex text-4xl  md:text-7xl text-white  px-8 font-bold flex-col justify-center items-start">
         <p>
           Truck Management
         </p>
@@ -35,8 +35,8 @@
       </button>
     </div>
 
-    <div class="grid gap-4 p-8 grid-cols-3">
-      <div class="bg-[#161616] p-5 shadow-md z-30 rounded-lg">
+    <div class="grid gap-6 p-8 md:grid-cols-3">
+      <div class="bg-[#161616] p-5 hover:scale-105 transition-all ease-in-out duration-500 shadow-md z-30 rounded-lg">
         <%= Heroicons.icon("chart-bar",
           type: "solid",
           class: "h-12 w-12 bg-white rounded-full text-red-500 p-2"
@@ -49,7 +49,7 @@
         </p>
       </div>
 
-      <div class="bg-[#161616] p-5 shadow-md z-30 rounded-lg">
+      <div class="bg-[#161616] transition-all ease-in-out duration-500 p-5 shadow-md z-30 rounded-lg">
         <%= Heroicons.icon("wrench-screwdriver",
           type: "solid",
           class: "h-12 w-12 bg-white rounded-full text-red-500 p-2"
@@ -62,7 +62,7 @@
         </p>
       </div>
 
-      <div class="bg-[#161616] p-5 shadow-md z-30 rounded-lg">
+      <div class="bg-[#161616] p-5 transition-all ease-in-out duration-500 shadow-md z-30 rounded-lg">
         <%= Heroicons.icon("user-group",
           type: "solid",
           class: "h-12 w-12 bg-white rounded-full text-red-500 p-2"

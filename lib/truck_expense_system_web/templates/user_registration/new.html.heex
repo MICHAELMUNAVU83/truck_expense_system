@@ -1,28 +1,56 @@
-<h1>Register</h1>
+<div class=" homebg h-[100vh]">
+  <div class="h-[100%] w-[100%] flex flex-col justify-center items-center  bg-gradient-to-r from-black/50   to-red-500/80">
+    <div class="bg-black p-4 rounded-md items-center flex-col  gap-4 flex justify-center h-[500px] w-[500px]">
+      <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
+        <%= if @changeset.action do %>
+          <div class="alert alert-danger">
+            <p>Oops, something went wrong! Please check the errors below.</p>
+          </div>
+        <% end %>
 
-<.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+        <p class="animate-pulse text-xl text-center text-white">
+          Truck Expense System
+        </p>
+
+        <p class="text-center text-2xl font-semibold text-red-500">
+          Sign Up
+        </p>
+
+        <div class="flex w-[100%] flex-col">
+          <%= label(f, :email, class: "text-red-500") %>
+          <%= email_input(f, :email,
+            required: true,
+            placeholder: "Email address",
+            class: "w-[400px] border-2 border-gray-500 rounded-md"
+          ) %>
+          <p class="pt-5">
+            <%= error_tag(f, :email) %>
+          </p>
+        </div>
+
+        <div class="flex flex-col">
+          <%= label(f, :password, class: "text-red-500") %>
+          <%= password_input(f, :password,
+            required: true,
+            placeholder: "Password",
+            class: "w-[400px] border-2 border-gray-500 rounded-md"
+          ) %>
+          <p class="pt-5">
+            <%= error_tag(f, :password) %>
+          </p>
+        </div>
+
+        <div class="bg-red-500 mt-4 p-2 hover:scale-105 transition-all duration-500 ease-in-out rounded-md text-center text-xl  text-white w-[100%]">
+          <%= submit("Register") %>
+        </div>
+        <div class="text-white mt-4 flex justify-center items-center">
+          <p>
+            <%= link("Back", to: Routes.page_index_path(@conn, :index)) %> | <%= link("Log in",
+              to: Routes.user_session_path(@conn, :new)
+            ) %>
+          </p>
+        </div>
+      </.form>
     </div>
-  <% end %>
-
-  <%= label(f, :email) %>
-  <%= email_input(f, :email, required: true) %>
-  <%= error_tag(f, :email) %>
-
-  <%= label(f, :password) %>
-  <%= password_input(f, :password, required: true) %>
-  <%= error_tag(f, :password) %>
-
-  <div>
-    <%= submit("Register") %>
   </div>
-</.form>
-
-<p>
-  <%= link("Log in", to: Routes.user_session_path(@conn, :new)) %> | <%= link(
-    "Forgot your password?",
-    to: Routes.user_reset_password_path(@conn, :new)
-  ) %>
-</p>
+</div>
