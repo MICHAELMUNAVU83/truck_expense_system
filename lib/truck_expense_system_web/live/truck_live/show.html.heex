@@ -100,8 +100,29 @@
         <% end %>
       </div>
 
+      <div class="py-5 px-4">
+        <label for="default-search" class="mb-2 text-sm font-medium text-[#808AA2] sr-only ">
+          Search
+        </label>
+        <div class="flex justify-between md:flex-row gap-2 flex-col w-[100%] ">
+          <.form
+            let={f}
+            id="search"
+            phx-change="search"
+            for={@search_changeset}
+            class="w-[100%] flex flex-row gap-2 items-center"
+          >
+            <%= text_input(f, :search,
+              placeholder: "Search by any field",
+              class:
+                "w-[90%]  mx-auto text-[#808AA2] border-[#131217] border-2  p-2 px-4  text-sm border border-transparent  focus:ring-0   bg-black border-none h-[50px] "
+            ) %>
+          </.form>
+        </div>
+      </div>
+
       <div class="flex flex-col p-8 gap-6">
-        <%= for spare <- @truck.spares do %>
+        <%= for spare <- @spares do %>
           <div class="bg-black cursor-pointer p-2 text-white flex flex-col gap-1 rounded-md transition-all ease-in-out duration-500 w-[100%] hover:shadow-white  shadow-red-500/50 shadow-md">
             <div class="gap-1 items-center flex">
               <p class="text-xl text-red-500">

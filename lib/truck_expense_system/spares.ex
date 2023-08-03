@@ -37,6 +37,21 @@ defmodule TruckExpenseSystem.Spares do
   """
   def get_spare!(id), do: Repo.get!(Spare, id)
 
+  def get_spare_search_results(truck_id, searchterm) do
+    Repo.all(Spare)
+    |> Enum.filter(fn spare ->
+      spare.truck_id == truck_id and
+        String.contains?(
+          String.downcase(spare.name),
+          String.downcase(searchterm) or
+            String.contains?(
+              String.downcase(spare.location_purchased_at),
+              String.downcase(searchterm)
+            )
+        )
+    end)
+  end
+
   @doc """
   Creates a spare.
 
