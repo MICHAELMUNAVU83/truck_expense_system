@@ -1,6 +1,6 @@
 <div class=" homebg h-[100vh]">
   <div class="h-[100%] w-[100%] flex flex-col justify-center items-center  bg-gradient-to-r from-black/50   to-red-500/80">
-    <div class="bg-black p-4 rounded-md items-center flex-col  gap-4 flex justify-center h-[400px] w-[350px] md:h-[500px] md:w-[500px]">
+    <div class="bg-black p-4 rounded-md items-center flex-col  gap-4 flex justify-center min-h-[400px] w-[350px] md:min-h-h-[500px] md:w-[500px]">
       <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
         <%= if @error_message do %>
           <div class="alert alert-danger">

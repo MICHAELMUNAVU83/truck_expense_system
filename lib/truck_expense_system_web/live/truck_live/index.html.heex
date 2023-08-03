@@ -1,5 +1,3 @@
-<h1>Listing Trucks</h1>
-
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.truck_index_path(@socket, :index)}>
     <.live_component
@@ -13,45 +11,89 @@
     />
   </.modal>
 <% end %>
+<div class="bg-[#161616] min-h-[100vh]">
+  <div class="flex bg-black text-white p-4 justify-between items-center">
+    <p class="animate-pulse md:text-xl font-bold">
+      Truck Management System
+    </p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Registration number</th>
-      <th>Image</th>
-      <th>Description</th>
+    <p>
+      <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>
+    </p>
+  </div>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody id="trucks">
+  <div class="flex justify-start items-center">
+    <%= live_patch(to: Routes.truck_index_path(@socket, :new) , class: "bg-red-500 text-white p-2 flex items-center gap-1 rounded-md m-4") do %>
+      <p>
+        Add  A New Truck
+      </p>
+      <%= Heroicons.icon("plus",
+        type: "solid",
+        class: "h-8 w-8 text-white p-2"
+      ) %>
+    <% end %>
+  </div>
+
+  <div class="p-4 grid grid-cols-3 gap-16">
     <%= for truck <- @trucks do %>
-      <tr id={"truck-#{truck.id}"}>
-        <td><%= truck.registration_number %></td>
-        <td>
-          <img src={truck.image} class="h-[100px] w-[100px] object-cover" />
-        </td>
-        <td><%= truck.description %></td>
+      <div class="flex flex-col  w-[100%] cursor-pointer bg-black hover:scale-105 transition-all ease-in-out duration-500  rounded-md ">
+        <img src={truck.image} class="h-[300px] w-[100%] object-cover" />
 
-        <td>
-          <span>
-            <%= live_redirect("Show", to: Routes.truck_show_path(@socket, :show, truck)) %>
-          </span>
-          <span>
-            <%= live_patch("Edit", to: Routes.truck_index_path(@socket, :edit, truck)) %>
-          </span>
-          <span>
-            <%= link("Delete",
+        <div class="flex flex-col  text-red-500  gap-2 p-4">
+          <p class="text-2xl font-bold">
+            <%= truck.registration_number %>
+          </p>
+          <p class="text-xl text-white break-words">
+            <%= truck.description %>
+          </p>
+        </div>
+
+        <div class="flex justify-between   p-4">
+          <%= live_redirect(to: Routes.truck_show_path(@socket, :show, truck) , class: "bg-[#161616] w-[30%] rounded-md flex flex-col gap-2 items-start p-2") do %>
+            <div class="flex gap-2 flex-col">
+              <%= Heroicons.icon("eye",
+                type: "solid",
+                class: "h-10 w-10 bg-white rounded-full text-red-500 p-2"
+              ) %>
+
+              <p class="text-white">
+                View Spares
+              </p>
+            </div>
+          <% end %>
+          <%= live_patch(to: Routes.truck_index_path(@socket, :edit, truck), class: "bg-[#161616] w-[30%] rounded-md flex flex-col gap-2 items-start p-2") do %>
+            <div class="flex gap-2 flex-col">
+              <%= Heroicons.icon("pencil",
+                type: "solid",
+                class: "h-10 w-10 bg-white rounded-full text-red-500 p-2"
+              ) %>
+
+              <p class="text-white">
+                Edit Truck
+              </p>
+            </div>
+          <% end %>
+
+          <%= link(
               to: "#",
               phx_click: "delete",
               phx_value_id: truck.id,
+              class: "bg-[#161616] w-[30%] rounded-md flex flex-col gap-2 items-start p-2",
               data: [confirm: "Are you sure?"]
-            ) %>
-          </span>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+            )  do %>
+            <div class="flex gap-2 flex-col">
+              <%= Heroicons.icon("trash",
+                type: "solid",
+                class: "h-10 w-10 bg-white rounded-full text-red-500 p-2"
+              ) %>
 
-<span><%= live_patch("New Truck", to: Routes.truck_index_path(@socket, :new)) %></span>
+              <p class="text-white">
+                Edit Truck
+              </p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
