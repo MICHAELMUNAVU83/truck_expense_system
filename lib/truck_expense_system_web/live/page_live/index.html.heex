@@ -1,19 +1,79 @@
 <div class="homebg h-[100vh]">
+  <div class="h-[100%] w-[100%] flex flex-col justify-between  bg-gradient-to-r from-black/50   to-red-500/80">
+    <div class="bg-black text-white flex justify-between py-4 p-2">
+      <p class="animate-pulse text-xl font-bold">
+        Truck Management System
+      </p>
 
-<div class="bg-black text-white flex justify-between p-2">
-  <p>
-    Truck Management System
-  </p>
+      <div class="flex gap-2 items-center">
+        <%= if @user != nil do %>
+          <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>
+        <% else %>
+          <%= link("Register", to: Routes.user_registration_path(@socket, :new)) %>
+          <%= link("Log in", to: Routes.user_session_path(@socket, :new)) %>
+        <% end %>
+      </div>
+    </div>
 
-  <div class="flex gap-2 items-center">
-    <%= if @user != nil do %>
-      <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>
-    <% else %>
-      <%= link("Register", to: Routes.user_registration_path(@socket, :new)) %>
-      <%= link("Log in", to: Routes.user_session_path(@socket, :new)) %>
-    <% end %>
+    <div class="flex flex-col gap-2">
+      <div class="flex  text-7xl text-white  px-8 font-bold flex-col justify-center items-start">
+        <p>
+          Truck Management
+        </p>
+        <p>
+          System
+        </p>
+      </div>
+
+      <button class="home-btn mt-10 md:mt-20 ml-3 md:ml-3 flex items-center w-[90%] md:w-[28%] ">
+        <h1>Get started</h1>
+
+        <%= Heroicons.icon("arrow-right",
+          type: "solid",
+          class: "h-12 w-12 bg-white rounded-full text-red-500 p-2"
+        ) %>
+      </button>
+    </div>
+
+    <div class="grid gap-4 p-8 grid-cols-3">
+      <div class="bg-[#161616] p-5 shadow-md z-30 rounded-lg">
+        <%= Heroicons.icon("chart-bar",
+          type: "solid",
+          class: "h-12 w-12 bg-white rounded-full text-red-500 p-2"
+        ) %>
+        <h1 class="text-[#fff] text-2xl font-bold uppercase mt-5">
+          Truck Expense Tracking
+        </h1>
+        <p class="text-[#5c5c5c] font-xl font-medium mt-5">
+          Track your truck expenses
+        </p>
+      </div>
+
+      <div class="bg-[#161616] p-5 shadow-md z-30 rounded-lg">
+        <%= Heroicons.icon("wrench-screwdriver",
+          type: "solid",
+          class: "h-12 w-12 bg-white rounded-full text-red-500 p-2"
+        ) %>
+        <h1 class="text-[#fff] text-2xl font-bold uppercase mt-5">
+          Spare Parts Management
+        </h1>
+        <p class="text-[#5c5c5c] font-xl font-medium mt-5">
+          Manage your spare parts and their usage
+        </p>
+      </div>
+
+      <div class="bg-[#161616] p-5 shadow-md z-30 rounded-lg">
+        <%= Heroicons.icon("user-group",
+          type: "solid",
+          class: "h-12 w-12 bg-white rounded-full text-red-500 p-2"
+        ) %>
+        <h1 class="text-[#fff] text-2xl font-bold uppercase mt-5">
+          Mechanics Management
+        </h1>
+        <p class="text-[#5c5c5c] font-xl font-medium mt-5">
+          Manage your mechanics and their work
+        </p>
+      </div>
+    </div>
   </div>
-</div>
-
-
 </div>
