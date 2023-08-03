@@ -146,9 +146,37 @@
               </p>
             </div>
 
-            <%= live_redirect("Edit",
-              to: Routes.truck_show_path(@socket, :edit_spare, @truck.id, spare.id)
-            ) %>
+            <p class="bg-gradient-to-r from-white to-red-700 h-[1px] w-[100%]"/>
+            
+
+            <div class="flex justify-between items-center">
+              <div class="flex justify-center items-center">
+                <%= if spare.approved== false do %>
+                  <p class="text-xl text-red-500">
+                    Not Approved
+                  </p>
+                <% else %>
+                  <p class="text-xl text-green-500">
+                    Approved
+                  </p>
+                <% end %>
+              </div>
+
+              <div class="flex gap-2 items-center ">
+                <%= if spare.approved == false do %>
+                  <div>
+                    <%= live_redirect(
+                      to: Routes.truck_show_path(@socket, :edit_spare, @truck.id, spare.id)
+                    ) do %>
+                      <%= Heroicons.icon("pencil",
+                        type: "solid",
+                        class: "h-6 w-6  text-white "
+                      ) %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
           </div>
         <% end %>
       </div>
