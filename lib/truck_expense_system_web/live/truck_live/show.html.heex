@@ -12,7 +12,7 @@
     />
   </.modal>
 <% end %>
-<ul>
+<%!-- <ul>
   <li>
     <strong>Registration number:</strong>
     <%= @truck.registration_number %>
@@ -44,4 +44,32 @@
 
 <%= live_redirect("Add Spare", to: Routes.truck_show_path(@socket, :add_spare, @truck.id)) %>
 
-<span><%= live_redirect("Back", to: Routes.truck_index_path(@socket, :index)) %></span>
+<span><%= live_redirect("Back", to: Routes.truck_index_path(@socket, :index)) %></span> --%>
+
+<div class="bg-[#161616] min-h-[100vh]">
+  <div class="flex absolute top-0 w-[100%] bg-black text-white p-4 justify-between items-center">
+    <p class="animate-pulse md:text-xl font-bold">
+      Truck Management System
+    </p>
+
+    <div class="text-xl gap-2 flex items-center">
+      <%= live_redirect("Trucks",
+        to: Routes.truck_index_path(@socket, :index),
+        class: "hover:text-red-500 transition-all ease-in-out duration-500"
+      ) %>
+      <%= link("Log out",
+        to: Routes.user_session_path(@socket, :delete),
+        method: :delete,
+        class: "hover:text-red-500 transition-all ease-in-out duration-500"
+      ) %>
+    </div>
+  </div>
+  <div class="flex ">
+    <div class="w-[50%] pt-20 p-4 bg-red-500 h-[100vh]">
+      hbjnkm
+    </div>
+    <div class="w-[50%] pt-20 p-4 bg-blue-500 overflow-y-scroll h-[100vh]">
+      hbjnkm
+    </div>
+  </div>
+</div>
