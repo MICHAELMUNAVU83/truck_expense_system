@@ -21,6 +21,7 @@ defmodule TruckExpenseSystemWeb.Router do
     pipe_through(:browser)
 
     live("/", PageLive.Index, :index)
+
     live("/trucks", TruckLive.Index, :index)
     live("/trucks/new", TruckLive.Index, :new)
     live("/trucks/:id/edit", TruckLive.Index, :edit)
