@@ -2,12 +2,15 @@ defmodule TruckExpenseSystemWeb.AdminPanelLive.Index do
   use TruckExpenseSystemWeb, :live_view
   alias TruckExpenseSystem.Spares
   alias TruckExpenseSystem.Trucks
+  alias TruckExpenseSystem.Trucks.Truck
 
   def mount(_params, _session, socket) do
     trucks = Trucks.list_trucks()
+    search_changeset = Trucks.change_truck(%Truck{})
 
     {:ok,
      socket
+     |> assign(:search_changeset, search_changeset)
      |> assign(:trucks, trucks)}
   end
 
@@ -47,5 +50,18 @@ defmodule TruckExpenseSystemWeb.AdminPanelLive.Index do
      |> put_flash(:info, "Spare approved")
      |> assign(:approved_spares, approved_spares)
      |> assign(:pending_spares, pending_spares)}
+  end
+
+  def handle_event("search", %{"truck" => truck_params}, socket) do
+    {:noreply,
+     socket
+     |> assign(
+       :trucks,
+       Trucks.get_truck_search_results(truck_params["search"])
+     )
+     |> assign(
+       :search_changeset,
+       Trucks.change_truck(%Truck{}, truck_params)
+     )}
   end
 end

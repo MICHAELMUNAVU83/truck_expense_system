@@ -7,6 +7,7 @@ defmodule TruckExpenseSystem.Trucks do
   alias TruckExpenseSystem.Repo
 
   alias TruckExpenseSystem.Trucks.Truck
+  alias TruckExpenseSystem.Spares.Spare
 
   @doc """
   Returns the list of trucks.
@@ -38,6 +39,16 @@ defmodule TruckExpenseSystem.Trucks do
       String.contains?(String.downcase(truck.registration_number), String.downcase(searchterm)) or
         String.contains?(String.downcase(truck.description), String.downcase(searchterm))
     end)
+  end
+
+  def get_pending_spare_approvals_for_a_truck(id) do
+    Repo.all(Spare)
+    |> Enum.filter(fn spare -> spare.truck_id == id and spare.approved == false end)
+  end
+
+  def get_approved_spare_approvals_for_a_truck(id) do
+    Repo.all(Spare)
+    |> Enum.filter(fn spare -> spare.truck_id == id and spare.approved == true end)
   end
 
   @doc """

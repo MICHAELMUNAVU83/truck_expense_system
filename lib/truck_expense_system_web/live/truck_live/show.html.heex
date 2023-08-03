@@ -12,39 +12,6 @@
     />
   </.modal>
 <% end %>
-<%!-- <ul>
-  <li>
-    <strong>Registration number:</strong>
-    <%= @truck.registration_number %>
-  </li>
-
-  <li>
-    <strong>Image:</strong>
-    <img src={@truck.image} class="w-[100px] object-cover" />
-  </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @truck.description %>
-  </li>
-</ul>
-
-<div>
-  <%= for spare <- @truck.spares do %>
-    <div>
-      <%= spare.name %>
-      <%= spare.total_cost %>
-
-      <%= live_redirect("Edit",
-        to: Routes.truck_show_path(@socket, :edit_spare, @truck.id, spare.id)
-      ) %>
-    </div>
-  <% end %>
-</div>
-
-<%= live_redirect("Add Spare", to: Routes.truck_show_path(@socket, :add_spare, @truck.id)) %>
-
-<span><%= live_redirect("Back", to: Routes.truck_index_path(@socket, :index)) %></span> --%>
 
 <div class=" min-h-[100vh]">
   <div class="flex absolute top-0 w-[100%] bg-black text-white p-4 justify-between items-center">

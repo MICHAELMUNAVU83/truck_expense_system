@@ -32,13 +32,6 @@ defmodule TruckExpenseSystemWeb.Router do
     live("/trucks/:id", TruckLive.Show, :show)
     live("/trucks/:id/show/edit", TruckLive.Show, :edit)
 
-    live("/spares", SpareLive.Index, :index)
-    live("/spares/new", SpareLive.Index, :new)
-    live("/spares/:id/edit", SpareLive.Index, :edit)
-
-    live("/spares/:id", SpareLive.Show, :show)
-    live("/spares/:id/show/edit", SpareLive.Show, :edit)
-
     live("/admin_panel", AdminPanelLive.Index, :index)
     live("/admin_panel/:id", AdminPanelLive.Show, :show)
   end

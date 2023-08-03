@@ -1,5 +1,66 @@
-<%= for truck <- @trucks do %>
+<%!-- <%= for truck <- @trucks do %>
   <%= truck.registration_number %>
 
   <%= live_redirect("Show", to: Routes.admin_panel_show_path(@socket, :show, truck.id)) %>
 <% end %>
+ --%>
+
+
+<div class="bg-[#161616] min-h-[100vh]">
+  <div class="flex bg-black text-white p-4 justify-between items-center">
+    <p class="animate-pulse md:text-xl font-bold">
+      Truck Management System
+    </p>
+
+    <p>
+      <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>
+    </p>
+  </div>
+  <div class="py-5 px-4">
+    <label for="default-search" class="mb-2 text-sm font-medium text-[#808AA2] sr-only ">
+      Search
+    </label>
+    <div class="flex justify-between md:flex-row gap-2 flex-col w-[100%] ">
+      <.form
+        let={f}
+        id="search"
+        phx-change="search"
+        for={@search_changeset}
+        class="w-[100%] flex flex-row gap-2 items-center"
+      >
+        <%= text_input(f, :search,
+          placeholder: "Search by Registration Number",
+          class:
+            "w-[90%]  mx-auto text-[#808AA2] border-[#131217] border-2  p-2 px-4  text-sm border border-transparent  focus:ring-0   bg-black border-none h-[50px] "
+        ) %>
+      </.form>
+    </div>
+  </div>
+
+  <div class="p-4 grid grid-cols-3 gap-16">
+    <%= for truck <- @trucks do %>
+      <div class="flex flex-col  w-[100%] cursor-pointer bg-black hover:scale-105 transition-all ease-in-out duration-500  rounded-md ">
+        <img src={truck.image} class="h-[300px] w-[100%] object-cover" />
+
+        <div class="flex flex-col  text-red-500  gap-2 p-4">
+          <p class="text-2xl uppercase font-bold">
+            <%= truck.registration_number %>
+          </p>
+          <p class="text-xl text-white break-words">
+            <%= truck.description %>
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <div class="flex items-end gap-2">
+          <p>
+            Total Pending Spare Parts
+          </p>
+          <p>
+            <%= TruckExpenseSystem.Trucks.total_pending_spare_parts(truck.id) %>
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
