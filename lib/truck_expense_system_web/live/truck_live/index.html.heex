@@ -42,26 +42,16 @@
       <.form
         let={f}
         id="search"
-        phx-submit="search"
+        phx-change="search"
         for={@search_changeset}
-        class="md:w-[90%] flex flex-row gap-2 items-center"
+        class="w-[100%] flex flex-row gap-2 items-center"
       >
         <%= text_input(f, :search,
-          placeholder: "Search",
+          placeholder: "Search by Registration Number",
           class:
             "w-[90%]  mx-auto text-[#808AA2] border-[#131217] border-2  p-2 px-4  text-sm border border-transparent  focus:ring-0   bg-black border-none h-[50px] "
         ) %>
-        <%= submit("Search",
-          class:
-            "mx-auto  bg-red-500 text-white p-2 px-4 text-sm border border-transparent  focus:ring-0  border-none h-[50px] "
-        ) %>
       </.form>
-
-      <%= live_redirect(to: Routes.truck_index_path(@socket, :index) , class: "flex flex-row gap-2 items-center cursor-pointer p-2 px-4 bg-red-500 text-white" ) do %>
-        <p>
-          View All
-        </p>
-      <% end %>
     </div>
   </div>
 
