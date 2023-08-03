@@ -1,3 +1,19 @@
-<div class="bg-red-500 h-[20vh]">
-  page home
+<div class="homebg h-[100vh]">
+
+<div class="bg-black text-white flex justify-between p-2">
+  <p>
+    Truck Management System
+  </p>
+
+  <div class="flex gap-2 items-center">
+    <%= if @user != nil do %>
+      <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>
+    <% else %>
+      <%= link("Register", to: Routes.user_registration_path(@socket, :new)) %>
+      <%= link("Log in", to: Routes.user_session_path(@socket, :new)) %>
+    <% end %>
+  </div>
+</div>
+
+
 </div>
