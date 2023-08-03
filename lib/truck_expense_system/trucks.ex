@@ -32,6 +32,14 @@ defmodule TruckExpenseSystem.Trucks do
     total
   end
 
+  def get_truck_search_results(searchterm) do
+    Repo.all(Truck)
+    |> Enum.filter(fn truck ->
+      String.contains?(String.downcase(truck.registration_number), String.downcase(searchterm)) or
+        String.contains?(String.downcase(truck.description), String.downcase(searchterm))
+    end)
+  end
+
   @doc """
   Gets a single truck.
 
