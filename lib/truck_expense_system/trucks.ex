@@ -51,6 +51,13 @@ defmodule TruckExpenseSystem.Trucks do
     |> Enum.filter(fn spare -> spare.truck_id == id and spare.approved == true end)
   end
 
+  def get_total_spent_for_a_truck(id) do
+    Repo.all(Spare)
+    |> Enum.filter(fn spare -> spare.truck_id == id and spare.approved == false end)
+    |> Enum.map(fn spare -> spare.total_cost end)
+    |> Enum.sum()
+  end
+
   @doc """
   Gets a single truck.
 
