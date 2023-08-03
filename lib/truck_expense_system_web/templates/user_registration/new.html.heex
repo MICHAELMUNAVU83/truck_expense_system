@@ -1,6 +1,6 @@
 <div class=" homebg h-[100vh]">
   <div class="h-[100%] w-[100%] flex flex-col justify-center items-center  bg-gradient-to-r from-black/50   to-red-500/80">
-    <div class="bg-black p-4 rounded-md items-center flex-col  gap-4 flex justify-center h-[500px] w-[500px]">
+    <div class="bg-black p-4 rounded-md items-center flex-col  gap-4 flex justify-center h-[400px] w-[350px] md:h-[500px] md:w-[500px]">
       <.form let={f} for={@changeset} action={Routes.user_registration_path(@conn, :create)}>
         <%= if @changeset.action do %>
           <div class="alert alert-danger">
@@ -21,7 +21,7 @@
           <%= email_input(f, :email,
             required: true,
             placeholder: "Email address",
-            class: "w-[400px] border-2 border-gray-500 rounded-md"
+            class: "md:md:w-[400px] w-[300px]  border-2 border-gray-500 rounded-md"
           ) %>
           <p class="pt-5">
             <%= error_tag(f, :email) %>
@@ -33,7 +33,7 @@
           <%= password_input(f, :password,
             required: true,
             placeholder: "Password",
-            class: "w-[400px] border-2 border-gray-500 rounded-md"
+            class: "md:w-[400px] w-[300px] border-2 border-gray-500 rounded-md"
           ) %>
           <p class="pt-5">
             <%= error_tag(f, :password) %>
