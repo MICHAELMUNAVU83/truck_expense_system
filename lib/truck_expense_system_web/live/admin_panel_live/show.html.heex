@@ -56,83 +56,89 @@
         </div>
       </div>
 
-      <p class="text-red-500 text-2xl text-center  uppercase">
-        Pending spares
+      <p class="text-red-500 text-2xl underline  text-center  uppercase">
+        Spares Pending Approval
       </p>
 
-      <div>
-        <%= for spare <- @pending_spares do %>
-          <div class="bg-black cursor-pointer p-2 text-white flex flex-col gap-1 rounded-md transition-all ease-in-out duration-500 w-[100%] hover:shadow-white  shadow-red-500/50 shadow-md">
-            <div class="gap-1 items-center flex">
-              <p class="text-xl text-red-500">
-                Name of Spare :
-              </p>
-              <p class="text-xl text-white">
-                <%= spare.name %>
-              </p>
-            </div>
-            <div class="gap-1 items-center flex">
-              <p class="text-xl text-red-500">
-                Type of Spare :
-              </p>
-              <p class="text-xl text-white">
-                <%= spare.type_of_spare %>
-              </p>
-            </div>
+      <%= if @pending_spares != [] do %>
+        <div>
+          <%= for spare <- @pending_spares do %>
+            <div class="bg-black cursor-pointer p-2 text-white flex flex-col gap-1 rounded-md transition-all ease-in-out duration-500 w-[100%] hover:shadow-white  shadow-red-500/50 shadow-md">
+              <div class="gap-1 items-center flex">
+                <p class="text-xl text-red-500">
+                  Name of Spare :
+                </p>
+                <p class="text-xl text-white">
+                  <%= spare.name %>
+                </p>
+              </div>
+              <div class="gap-1 items-center flex">
+                <p class="text-xl text-red-500">
+                  Type of Spare :
+                </p>
+                <p class="text-xl text-white">
+                  <%= spare.type_of_spare %>
+                </p>
+              </div>
 
-            <div class="gap-1 items-center flex">
-              <p class="text-xl text-red-500">
-                Cost of Spare :
-              </p>
-              <p class="text-xl text-white">
-                <%= spare.cost %> Ksh
-              </p>
-            </div>
+              <div class="gap-1 items-center flex">
+                <p class="text-xl text-red-500">
+                  Cost of Spare :
+                </p>
+                <p class="text-xl text-white">
+                  <%= spare.cost %> Ksh
+                </p>
+              </div>
 
-            <div class="gap-1 items-center flex">
-              <p class="text-xl text-red-500">
-                Quantity of Spare :
-              </p>
-              <p class="text-xl text-white">
-                <%= spare.quantity %>
-              </p>
-            </div>
-            <div class="gap-1 items-center flex">
-              <p class="text-xl text-red-500">
-                Total Cost of Spare :
-              </p>
-              <p class="text-xl text-white">
-                <%= spare.total_cost %> Ksh
-              </p>
-            </div>
-            <div class="gap-1 items-center flex">
-              <p class="text-xl text-red-500">
-                Location Spare was bought :
-              </p>
-              <p class="text-xl text-white">
-                <%= spare.location_purchased_at %>
-              </p>
-            </div>
+              <div class="gap-1 items-center flex">
+                <p class="text-xl text-red-500">
+                  Quantity of Spare :
+                </p>
+                <p class="text-xl text-white">
+                  <%= spare.quantity %>
+                </p>
+              </div>
+              <div class="gap-1 items-center flex">
+                <p class="text-xl text-red-500">
+                  Total Cost of Spare :
+                </p>
+                <p class="text-xl text-white">
+                  <%= spare.total_cost %> Ksh
+                </p>
+              </div>
+              <div class="gap-1 items-center flex">
+                <p class="text-xl text-red-500">
+                  Location Spare was bought :
+                </p>
+                <p class="text-xl text-white">
+                  <%= spare.location_purchased_at %>
+                </p>
+              </div>
 
-            <p class="bg-gradient-to-r from-white to-red-700 h-[1px] w-[100%]" />
+              <p class="bg-gradient-to-r from-white to-red-700 h-[1px] w-[100%]" />
 
-            <div class="flex justify-between items-center">
-              <div class="flex justify-center items-center">
-                <%= link(
+              <div class="flex justify-between items-center">
+                <div class="flex justify-center items-center">
+                  <%= link(
             to: "#",
             phx_click: "approve_spare",
             phx_value_id: spare.id,
             data: [confirm: "Are you sure?"]
           ) do %>
-                  <p class=" bg-white px-4 py-2 text-black text-xl ">
-                    Approve This Purchase
-                  </p>
-                <% end %>
+                    <p class=" bg-white px-4 py-2 text-black text-xl ">
+                      Approve This Purchase
+                    </p>
+                  <% end %>
+                </div>
               </div>
             </div>
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-center text-white">
+          You have no pending spares
+        </p>
+      <% end %>
     </div>
     <div class="w-[50%] pt-20 p-4 flex flex-col gap-2 bg-[#161616] overflow-y-scroll h-[100vh]">
       yhbjnkml,
