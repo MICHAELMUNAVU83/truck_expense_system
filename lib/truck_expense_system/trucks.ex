@@ -53,7 +53,7 @@ defmodule TruckExpenseSystem.Trucks do
 
   def get_total_spent_for_a_truck(id) do
     Repo.all(Spare)
-    |> Enum.filter(fn spare -> spare.truck_id == id and spare.approved == false end)
+    |> Enum.filter(fn spare -> spare.truck_id == id and spare.approved == true end)
     |> Enum.map(fn spare -> spare.total_cost end)
     |> Enum.sum()
   end

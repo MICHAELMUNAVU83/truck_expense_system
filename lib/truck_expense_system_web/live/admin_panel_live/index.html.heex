@@ -7,9 +7,9 @@
 
 <div class="bg-[#161616] min-h-[100vh]">
   <div class="flex bg-black text-white p-4 justify-between items-center">
-    <p class="animate-pulse md:text-xl font-bold">
+    <a href="/" class="animate-pulse md:text-xl font-bold">
       Truck Management System
-    </p>
+    </a>
 
     <p>
       <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>

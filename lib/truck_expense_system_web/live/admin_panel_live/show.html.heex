@@ -1,30 +1,8 @@
-<%!-- <div>
-  <%= @truck.registration_number %>
-</div>
-
-
-
-<p>
-  Approved spares
-</p>
-
-<div>
-  <%= for approved <- @approved_spares do %>
-    <%= approved.name %>
-
-    <%= link("Disapprove",
-      to: "#",
-      phx_click: "disapprove_spare",
-      phx_value_id: approved.id,
-      data: [confirm: "Are you sure?"]
-    ) %>
-  <% end %>
-</div> --%>
 <div class="bg-[#161616] min-h-[100vh]">
   <div class="flex  absolute w-[100%] top-0 bg-black text-white p-4 justify-between items-center">
-    <p class="animate-pulse md:text-xl font-bold">
+    <a href="/" class="animate-pulse md:text-xl font-bold">
       Truck Management System
-    </p>
+    </a>
 
     <p>
       <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>
@@ -148,20 +126,18 @@
       <div class="flex flex-col p-2 bg-white rounded-md gap-4 w-[100%]">
         <%= for spares <-   @approved_spares_grouped_monthly do %>
           <div>
-          <div class="flex gap-2 items-center">
-          <p class="text-xl text-red-500">
-            <%= TruckExpenseSystem.Spares.get_year(spares) %>
-          </p>
+            <div class="flex gap-2 items-center">
+              <p class="text-xl text-red-500">
+                <%= TruckExpenseSystem.Spares.get_year(spares) %>
+              </p>
 
-          <p class="text-xl text-red-500">
-
-            <%= TruckExpenseSystem.Spares.get_month(spares) %>
-            </p>
+              <p class="text-xl text-red-500">
+                <%= TruckExpenseSystem.Spares.get_month(spares) %>
+              </p>
             </div>
 
             <p>
-            Total Spent on Spares: 
-              <%= TruckExpenseSystem.Spares.get_total_for_a_month(spares) %> Ksh
+              Total Spent on Spares: <%= TruckExpenseSystem.Spares.get_total_for_a_month(spares) %> Ksh
             </p>
 
             <div class="flex flex-col gap-4">

@@ -6,12 +6,28 @@
       </p>
 
       <div class="flex gap-2 items-center">
-        <%= if @user != nil do %>
-          <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>
-        <% else %>
-          <%= link("Register", to: Routes.user_registration_path(@socket, :new)) %>
-          <%= link("Log in", to: Routes.user_session_path(@socket, :new)) %>
-        <% end %>
+        <div>
+          <%= if @user != nil do %>
+            <%= if @user.email != "admin@gmail.com" do %>
+              <%= live_redirect(to: Routes.truck_index_path(@socket, :index)) do %>
+                Trucks
+              <% end %>
+            <% else %>
+              <%= live_redirect(to: Routes.admin_panel_index_path(@socket, :index)) do %>
+                Admin Panel
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div>
+          <%= if @user != nil do %>
+            <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>
+          <% else %>
+            <%= link("Register", to: Routes.user_registration_path(@socket, :new)) %>
+            <%= link("Log in", to: Routes.user_session_path(@socket, :new)) %>
+          <% end %>
+        </div>
       </div>
     </div>
 

@@ -21,6 +21,10 @@ defmodule TruckExpenseSystemWeb.Router do
     pipe_through(:browser)
 
     live("/", PageLive.Index, :index)
+  end
+
+  scope "/", TruckExpenseSystemWeb do
+    pipe_through([:browser, :require_authenticated_user])
 
     live("/trucks", TruckLive.Index, :index)
     live("/trucks/new", TruckLive.Index, :new)
@@ -31,6 +35,10 @@ defmodule TruckExpenseSystemWeb.Router do
 
     live("/trucks/:id", TruckLive.Show, :show)
     live("/trucks/:id/show/edit", TruckLive.Show, :edit)
+  end
+
+  scope "/", TruckExpenseSystemWeb do
+    pipe_through([:browser, :require_authenticated_admin])
 
     live("/admin_panel", AdminPanelLive.Index, :index)
     live("/admin_panel/:id", AdminPanelLive.Show, :show)
