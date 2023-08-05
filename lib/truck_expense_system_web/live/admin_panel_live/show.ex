@@ -6,7 +6,7 @@ defmodule TruckExpenseSystemWeb.AdminPanelLive.Show do
   alias TruckExpenseSystem.Spares
   alias TruckExpenseSystem.Spares.Spare
   alias TruckExpenseSystem.Users
-
+  import Date
   @impl true
   def mount(_params, session, socket) do
     current_user = Users.get_user_by_session_token(session["user_token"])
@@ -28,10 +28,15 @@ defmodule TruckExpenseSystemWeb.AdminPanelLive.Show do
       truck.spares
       |> Enum.filter(fn spare -> spare.approved == true end)
 
+    approved_spares_grouped_monthly =
+      approved_spares
+      |> Enum.group_by(fn spare -> spare.inserted_at |> Timex.format!("{YYYY}-{M}") end)
+
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
      |> assign(:approved_spares, approved_spares)
+     |> assign(:approved_spares_grouped_monthly, approved_spares_grouped_monthly)
      |> assign(:pending_spares, pending_spares)
      |> assign(:truck, Trucks.get_truck!(params["id"]))}
   end
@@ -50,9 +55,14 @@ defmodule TruckExpenseSystemWeb.AdminPanelLive.Show do
       truck.spares
       |> Enum.filter(fn spare -> spare.approved == true end)
 
+    approved_spares_grouped_monthly =
+      approved_spares
+      |> Enum.group_by(fn spare -> spare.inserted_at |> Timex.format!("{YYYY}-{M}") end)
+
     {:noreply,
      socket
      |> put_flash(:info, "Spare approved")
+     |> assign(:approved_spares_grouped_monthly, approved_spares_grouped_monthly)
      |> assign(:approved_spares, approved_spares)
      |> assign(:pending_spares, pending_spares)}
   end
@@ -71,10 +81,15 @@ defmodule TruckExpenseSystemWeb.AdminPanelLive.Show do
       truck.spares
       |> Enum.filter(fn spare -> spare.approved == true end)
 
+    approved_spares_grouped_monthly =
+      approved_spares
+      |> Enum.group_by(fn spare -> spare.inserted_at |> Timex.format!("{YYYY}-{M} ") end)
+
     {:noreply,
      socket
      |> put_flash(:info, "Spare approved")
      |> assign(:approved_spares, approved_spares)
+     |> assign(:approved_spares_grouped_monthly, approved_spares_grouped_monthly)
      |> assign(:pending_spares, pending_spares)}
   end
 

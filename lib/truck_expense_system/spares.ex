@@ -21,6 +21,50 @@ defmodule TruckExpenseSystem.Spares do
     Repo.all(Spare)
   end
 
+  def get_year(map) do
+    {date_str, records} = map
+    year = String.slice(date_str, 0, 4)
+    month = String.slice(date_str, 5, 2)
+    year
+  end
+
+  def get_month(map) do
+    {date_str, records} = map
+
+    month = String.slice(date_str, 5, 2)
+
+    case month do
+      "1" -> "January"
+      "2" -> "February"
+      "3" -> "March"
+      "4" -> "April"
+      "5" -> "May"
+      "6" -> "June"
+      "7" -> "July"
+      "8" -> "August"
+      "9" -> "September"
+      "10" -> "October"
+      "11" -> "November"
+      "12" -> "December"
+    end
+  end
+
+  def get_records(map) do
+    {date, records} = map
+    records
+  end
+
+  def get_total_for_a_month(map) do
+    {date, records} = map
+
+    total =
+      records
+      |> Enum.map(fn spare -> spare.total_cost end)
+      |> Enum.sum()
+
+    total
+  end
+
   @doc """
   Gets a single spare.
 
