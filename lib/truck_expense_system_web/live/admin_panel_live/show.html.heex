@@ -148,11 +148,19 @@
       <div class="flex flex-col p-2 bg-white rounded-md gap-4 w-[100%]">
         <%= for spares <-   @approved_spares_grouped_monthly do %>
           <div>
+          <div class="flex gap-2 items-center">
+          <p class="text-xl text-red-500">
             <%= TruckExpenseSystem.Spares.get_year(spares) %>
+          </p>
+
+          <p class="text-xl text-red-500">
 
             <%= TruckExpenseSystem.Spares.get_month(spares) %>
+            </p>
+            </div>
 
             <p>
+            Total Spent on Spares: 
               <%= TruckExpenseSystem.Spares.get_total_for_a_month(spares) %> Ksh
             </p>
 
