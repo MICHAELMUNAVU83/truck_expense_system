@@ -7,8 +7,11 @@
 
 <div class="bg-[#161616] min-h-[100vh]">
   <div class="flex bg-black text-white p-4 justify-between items-center">
-    <a href="/" class="animate-pulse md:text-xl font-bold">
-      Truck Management System
+    <a href="/" class="flex gap-2 items-center">
+      <img src="/images/logo.png" class="h-12 w-12 md:h-16 md:w-16" alt="logo" />
+      <p class="animate-pulse md:text-xl font-bold">
+        Truck Management System
+      </p>
     </a>
 
     <p>
@@ -40,7 +43,7 @@
     <%= for truck <- @trucks do %>
       <%= live_redirect( to: Routes.admin_panel_show_path(@socket, :show, truck.id)) do %>
         <div class="flex flex-col  w-[100%] cursor-pointer bg-black hover:scale-105 transition-all ease-in-out duration-500  rounded-md ">
-          <img src={truck.image} class="h-[300px] w-[100%] object-cover" />
+          <img src="/images/truck.png" class="h-[300px] w-[100%] object-cover" />
 
           <div class="flex flex-col  text-red-500  gap-2 p-4">
             <p class="text-2xl uppercase font-bold">

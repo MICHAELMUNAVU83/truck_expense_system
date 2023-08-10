@@ -13,9 +13,12 @@
 <% end %>
 <div class="bg-[#161616] min-h-[100vh]">
   <div class="flex bg-black text-white p-4 justify-between items-center">
-    <p class="animate-pulse md:text-xl font-bold">
-      Truck Management System
-    </p>
+    <a href="/" class="flex gap-2 items-center">
+      <img src="/images/logo.png" class="h-12 w-12 md:h-16 md:w-16" alt="logo" />
+      <p class="animate-pulse md:text-xl font-bold">
+        Truck Management System
+      </p>
+    </a>
 
     <p>
       <%= link("Log out", to: Routes.user_session_path(@socket, :delete), method: :delete) %>
@@ -58,7 +61,7 @@
   <div class="p-4 grid grid-cols-3 gap-16">
     <%= for truck <- @trucks do %>
       <div class="flex flex-col  w-[100%] cursor-pointer bg-black hover:scale-105 transition-all ease-in-out duration-500  rounded-md ">
-        <img src={truck.image} class="h-[300px] w-[100%] object-cover" />
+        <img src="/images/truck.png" class="h-[300px] w-[100%] object-cover" />
 
         <div class="flex flex-col  text-red-500  gap-2 p-4">
           <p class="text-2xl uppercase font-bold">

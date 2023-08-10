@@ -1,9 +1,12 @@
 <div class="homebg  h-[100%] md:h-[100vh]">
   <div class="h-[100%] w-[100%] flex flex-col justify-between  bg-gradient-to-r from-black/50   to-red-500/80">
     <div class="bg-black text-white flex justify-between py-4 p-2">
-      <p class="animate-pulse md:text-xl font-bold">
-        Truck Management System
-      </p>
+      <div class="flex gap-2 items-center">
+        <img src="/images/logo.png" class="h-12 w-12 md:h-16 md:w-16" alt="logo" />
+        <p class="animate-pulse md:text-xl font-bold">
+          Truck Management System
+        </p>
+      </div>
 
       <div class="flex gap-2 items-center">
         <div>
@@ -40,15 +43,31 @@
           System
         </p>
       </div>
+      <%= if @user != nil do %>
+        <%= if @user.email != "admin@gmail.com" do %>
+          <%= live_redirect(to: Routes.truck_index_path(@socket, :index)) do %>
+            <button class="home-btn mt-10 md:mt-20 ml-3 md:ml-3 flex items-center w-[90%] md:w-[28%] ">
+              <h1>Get started</h1>
 
-      <button class="home-btn mt-10 md:mt-20 ml-3 md:ml-3 flex items-center w-[90%] md:w-[28%] ">
-        <h1>Get started</h1>
+              <%= Heroicons.icon("arrow-right",
+                type: "solid",
+                class: "h-12 w-12 bg-white rounded-full text-red-500 p-2"
+              ) %>
+            </button>
+          <% end %>
+        <% else %>
+          <%= live_redirect(to: Routes.admin_panel_index_path(@socket, :index)) do %>
+            <button class="home-btn mt-10 md:mt-20 ml-3 md:ml-3 flex items-center w-[90%] md:w-[28%] ">
+              <h1>Get started</h1>
 
-        <%= Heroicons.icon("arrow-right",
-          type: "solid",
-          class: "h-12 w-12 bg-white rounded-full text-red-500 p-2"
-        ) %>
-      </button>
+              <%= Heroicons.icon("arrow-right",
+                type: "solid",
+                class: "h-12 w-12 bg-white rounded-full text-red-500 p-2"
+              ) %>
+            </button>
+          <% end %>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="grid gap-6 p-8 md:grid-cols-3">
