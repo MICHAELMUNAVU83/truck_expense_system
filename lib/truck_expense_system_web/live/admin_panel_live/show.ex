@@ -32,6 +32,8 @@ defmodule TruckExpenseSystemWeb.AdminPanelLive.Show do
       approved_spares
       |> Enum.group_by(fn spare -> spare.inserted_at |> Timex.format!("{YYYY}-{M}") end)
 
+    IO.inspect(approved_spares_grouped_monthly)
+
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))

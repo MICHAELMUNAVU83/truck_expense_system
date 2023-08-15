@@ -123,99 +123,116 @@
         Monthly Spare Expenses for  This Truck
       </p>
 
-      <div class="flex flex-col p-2 bg-white rounded-md gap-4 w-[100%]">
-        <%= for spares <-   @approved_spares_grouped_monthly do %>
-          <div>
-            <div class="flex gap-2 items-center">
-              <p class="text-xl text-red-500">
-                <%= TruckExpenseSystem.Spares.get_year(spares) %>
-              </p>
+      <%= if @approved_spares_grouped_monthly != %{} do %>
+        <div id="pdf" phx-hook="Pdf">
+          <div class="flex flex-col p-2 bg-white rounded-md gap-4 w-[100%]">
+            <%= for spares <-   @approved_spares_grouped_monthly do %>
+              <div
+                class=" print "
+                id={
+                  TruckExpenseSystem.Spares.get_year(spares) <>
+                    TruckExpenseSystem.Spares.get_month(spares)
+                }
+              >
+                <div class="flex pb-2  gap-2 items-center">
+                  <p class="text-xl text-red-500">
+                    <%= TruckExpenseSystem.Spares.get_year(spares) %>
+                  </p>
 
-              <p class="text-xl text-red-500">
-                <%= TruckExpenseSystem.Spares.get_month(spares) %>
-              </p>
-            </div>
+                  <p class="text-xl text-red-500">
+                    <%= TruckExpenseSystem.Spares.get_month(spares) %>
+                  </p>
+                </div>
 
-            <p>
-              Total Spent on Spares: <%= TruckExpenseSystem.Spares.get_total_for_a_month(spares) %> Ksh
-            </p>
+                <p class="pb-4">
+                  Total Spent on Spares: <%= TruckExpenseSystem.Spares.get_total_for_a_month(
+                    spares
+                  ) %> Ksh
+                </p>
 
-            <div class="flex flex-col gap-4">
-              <%= for spare <- TruckExpenseSystem.Spares.get_records(spares) do %>
-                <div class="bg-black cursor-pointer p-2 text-white flex flex-col gap-1 rounded-md transition-all ease-in-out duration-500 w-[100%] hover:shadow-white  shadow-red-500/50 shadow-md">
-                  <div class="gap-1 items-center flex">
-                    <p class="text-xl text-red-500">
-                      Name of Spare :
-                    </p>
-                    <p class="text-xl text-white">
-                      <%= spare.name %>
-                    </p>
-                  </div>
-                  <div class="gap-1 items-center flex">
-                    <p class="text-xl text-red-500">
-                      Type of Spare :
-                    </p>
-                    <p class="text-xl text-white">
-                      <%= spare.type_of_spare %>
-                    </p>
-                  </div>
+                <div class="flex flex-col gap-4">
+                  <%= for spare <- TruckExpenseSystem.Spares.get_records(spares) do %>
+                    <div class="bg-black cursor-pointer p-2 text-white flex flex-col gap-1 rounded-md transition-all ease-in-out duration-500 w-[100%] hover:shadow-white  shadow-red-500/50 shadow-md">
+                      <div class="gap-1 items-center flex">
+                        <p class="text-xl text-red-500">
+                          Name of Spare :
+                        </p>
+                        <p class="text-xl text-white">
+                          <%= spare.name %>
+                        </p>
+                      </div>
+                      <div class="gap-1 items-center flex">
+                        <p class="text-xl text-red-500">
+                          Type of Spare :
+                        </p>
+                        <p class="text-xl text-white">
+                          <%= spare.type_of_spare %>
+                        </p>
+                      </div>
 
-                  <div class="gap-1 items-center flex">
-                    <p class="text-xl text-red-500">
-                      Cost of Spare :
-                    </p>
-                    <p class="text-xl text-white">
-                      <%= spare.cost %> Ksh
-                    </p>
-                  </div>
+                      <div class="gap-1 items-center flex">
+                        <p class="text-xl text-red-500">
+                          Cost of Spare :
+                        </p>
+                        <p class="text-xl text-white">
+                          <%= spare.cost %> Ksh
+                        </p>
+                      </div>
 
-                  <div class="gap-1 items-center flex">
-                    <p class="text-xl text-red-500">
-                      Quantity of Spare :
-                    </p>
-                    <p class="text-xl text-white">
-                      <%= spare.quantity %>
-                    </p>
-                  </div>
-                  <div class="gap-1 items-center flex">
-                    <p class="text-xl text-red-500">
-                      Total Cost of Spare :
-                    </p>
-                    <p class="text-xl text-white">
-                      <%= spare.total_cost %> Ksh
-                    </p>
-                  </div>
-                  <div class="gap-1 items-center flex">
-                    <p class="text-xl text-red-500">
-                      Location Spare was bought :
-                    </p>
-                    <p class="text-xl text-white">
-                      <%= spare.location_purchased_at %>
-                    </p>
-                  </div>
+                      <div class="gap-1 items-center flex">
+                        <p class="text-xl text-red-500">
+                          Quantity of Spare :
+                        </p>
+                        <p class="text-xl text-white">
+                          <%= spare.quantity %>
+                        </p>
+                      </div>
+                      <div class="gap-1 items-center flex">
+                        <p class="text-xl text-red-500">
+                          Total Cost of Spare :
+                        </p>
+                        <p class="text-xl text-white">
+                          <%= spare.total_cost %> Ksh
+                        </p>
+                      </div>
+                      <div class="gap-1 items-center flex">
+                        <p class="text-xl text-red-500">
+                          Location Spare was bought :
+                        </p>
+                        <p class="text-xl text-white">
+                          <%= spare.location_purchased_at %>
+                        </p>
+                      </div>
 
-                  <p class="bg-gradient-to-r from-white to-red-700 h-[1px] w-[100%]" />
+                      <p class="bg-gradient-to-r from-white to-red-700 h-[1px] w-[100%]" />
 
-                  <div class="flex justify-between items-center">
-                    <div class="flex justify-center items-center">
-                      <%= link(
+                      <div class="flex justify-between items-center">
+                        <div class="flex justify-center items-center">
+                          <%= link(
             to: "#",
             phx_click: "disapprove_spare",
             phx_value_id: spare.id,
             data: [confirm: "Are you sure?"]
           ) do %>
-                        <p class=" bg-white px-4 py-2 text-black text-xl ">
-                          Disapprove This Purchase
-                        </p>
-                      <% end %>
+                            <p class=" bg-white px-4 py-2 text-black text-xl ">
+                              Disapprove This Purchase
+                            </p>
+                          <% end %>
+                        </div>
+                      </div>
                     </div>
-                  </div>
+                  <% end %>
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
+            <button class="printButton">Print</button>
           </div>
-        <% end %>
-      </div>
+        </div>
+      <% else %>
+        <p class="text-center text-white text-2xl">
+          You have not approved any spares for this truck
+        </p>
+      <% end %>
     </div>
   </div>
 </div>

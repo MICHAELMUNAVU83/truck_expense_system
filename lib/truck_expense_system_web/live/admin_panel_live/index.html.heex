@@ -39,52 +39,56 @@
     </div>
   </div>
 
-  <div class="p-4 grid grid-cols-3 gap-16">
+  <div class="p-4 grid grid-cols-3 gap-16 " id="pdf" phx-hook="Pdf">
     <%= for truck <- @trucks do %>
-      <%= live_redirect( to: Routes.admin_panel_show_path(@socket, :show, truck.id)) do %>
-        <div class="flex flex-col  w-[100%] cursor-pointer bg-black hover:scale-105 transition-all ease-in-out duration-500  rounded-md ">
-          <img src="/images/truck.png" class="h-[300px] w-[100%] object-cover" />
+      <div>
+        <div class="flex flex-col p-2  rounded-md gap-4 w-[100%]">
+          <%= live_redirect( to: Routes.admin_panel_show_path(@socket, :show, truck.id)) do %>
+            <div class="flex flex-col  w-[100%] cursor-pointer bg-black hover:scale-105 transition-all ease-in-out duration-500  rounded-md ">
+              <img src="/images/truck.png" class="h-[300px] w-[100%] object-cover" />
 
-          <div class="flex flex-col  text-red-500  gap-2 p-4">
-            <p class="text-2xl uppercase font-bold">
-              <%= truck.registration_number %>
-            </p>
-            <p class="text-xl text-white break-words">
-              <%= truck.description %>
-            </p>
-          </div>
-          <div class="flex flex-col p-2 gap-2">
-            <div class="flex text-white items-end gap-2">
-              <p>
-                Total Pending Spare Parts :
-              </p>
-              <p>
-                <%= length(
-                  TruckExpenseSystem.Trucks.get_pending_spare_approvals_for_a_truck(truck.id)
-                ) %>
-              </p>
+              <div class="flex flex-col  text-red-500  gap-2 p-4">
+                <p class="text-2xl uppercase font-bold">
+                  <%= truck.registration_number %>
+                </p>
+                <p class="text-xl text-white break-words">
+                  <%= truck.description %>
+                </p>
+              </div>
+              <div class="flex flex-col p-2 gap-2">
+                <div class="flex text-white items-end gap-2">
+                  <p>
+                    Total Pending Spare Parts :
+                  </p>
+                  <p>
+                    <%= length(
+                      TruckExpenseSystem.Trucks.get_pending_spare_approvals_for_a_truck(truck.id)
+                    ) %>
+                  </p>
+                </div>
+                <div class="flex text-white items-end gap-2">
+                  <p>
+                    Total Pending Spare Parts :
+                  </p>
+                  <p>
+                    <%= length(
+                      TruckExpenseSystem.Trucks.get_approved_spare_approvals_for_a_truck(truck.id)
+                    ) %>
+                  </p>
+                </div>
+                <div class="flex text-white items-end gap-2">
+                  <p>
+                    Total Spent :
+                  </p>
+                  <p>
+                    <%= TruckExpenseSystem.Trucks.get_total_spent_for_a_truck(truck.id) %> Ksh
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="flex text-white items-end gap-2">
-              <p>
-                Total Pending Spare Parts :
-              </p>
-              <p>
-                <%= length(
-                  TruckExpenseSystem.Trucks.get_approved_spare_approvals_for_a_truck(truck.id)
-                ) %>
-              </p>
-            </div>
-            <div class="flex text-white items-end gap-2">
-              <p>
-                Total Spent :
-              </p>
-              <p>
-                <%= TruckExpenseSystem.Trucks.get_total_spent_for_a_truck(truck.id) %> Ksh
-              </p>
-            </div>
-          </div>
+          <% end %>
         </div>
-      <% end %>
+      </div>
     <% end %>
   </div>
 </div>
