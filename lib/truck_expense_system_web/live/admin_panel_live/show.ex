@@ -85,7 +85,7 @@ defmodule TruckExpenseSystemWeb.AdminPanelLive.Show do
 
     approved_spares_grouped_monthly =
       approved_spares
-      |> Enum.group_by(fn spare -> spare.inserted_at |> Timex.format!("{YYYY}-{M} ") end)
+      |> Enum.group_by(fn spare -> spare.inserted_at |> Timex.format!("{YYYY}-{M}") end)
 
     {:noreply,
      socket
