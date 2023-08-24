@@ -15,8 +15,16 @@ Truck Expense Management System
 This is a truck management system that allows a truck owner to effeciently manage trucks and more so the expenses incurred by the trucks. The system allows the truck owner to add trucks, add expenses, view expenses, view trucks, view expenses per truck, view expenses per truck per month, view expenses per truck per year, view expenses per truck per month .
 
 ## Screenshots
+![Screenshot 2023-08-24 at 09 12 02](https://github.com/MICHAELMUNAVU83/truck_expense_system/assets/86654131/83859fdc-a6b0-4632-8680-78f5d8bdf72b)
 
-<img width="1440" alt="Screenshot 2023-06-05 at 07 45 05" src="https://github.com/MICHAELMUNAVU83/art_store/assets/86654131/3b8a3c8f-5979-4375-a409-d66e69845ab1">
+
+
+https://github.com/MICHAELMUNAVU83/truck_expense_system/assets/86654131/dd0ad079-3a68-4ead-baba-786ecf2ebc5b
+
+
+
+
+
 
 ## Technologies
 
