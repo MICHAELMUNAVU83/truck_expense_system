@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for truck-expense-system on 2023-08-10T08:10:38+03:00
+# fly.toml app configuration file generated for truckexpensesystem on 2023-08-21T06:38:39-07:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "truck-expense-system"
-primary_region = "jnb"
+app = "truckexpensesystem"
+primary_region = "lax"
 kill_signal = "SIGTERM"
 swap_size_mb = 512
 
@@ -14,7 +14,7 @@ swap_size_mb = 512
   release_command = "/app/bin/migrate"
 
 [env]
-  PHX_HOST = "truck-expense-system.fly.dev"
+  PHX_HOST = "truckexpensesystem.fly.dev"
   PORT = "8080"
 
 [http_service]
